@@ -1,0 +1,8 @@
+# customer_analytics_dbt/.gitignore
+# author: Connor Dailey
+# date: 2026-04-29
+# description: ignore dbt build artifacts, installed packages, and run logs
+
+target/
+dbt_packages/
+logs/

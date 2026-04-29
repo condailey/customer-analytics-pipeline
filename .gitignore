@@ -1,3 +1,8 @@
+# .gitignore
+# author: Connor Dailey
+# date: 2026-04-29
+# description: repo-wide ignore rules for python, generated data, OS junk, and IDE files
+
 # Project spec doc, kept out of public repo
 CLAUDE.md
 
@@ -19,3 +24,6 @@ data/raw/*.csv
 .vscode/
 .idea/
 *.swp
+
+# dbt run logs (created wherever dbt is invoked)
+logs/

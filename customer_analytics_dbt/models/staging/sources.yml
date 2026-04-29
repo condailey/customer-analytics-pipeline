@@ -1,0 +1,16 @@
+# sources.yml
+# author: Connor Dailey
+# date: 2026-04-29
+# description: declares the snowflake RAW tables as dbt sources for staging models to reference
+
+version: 2
+
+sources:
+  - name: raw
+    database: CUSTOMER_ANALYTICS
+    schema: RAW
+    tables:
+      - name: raw_customers
+      - name: raw_subscription_events
+      - name: raw_marketing_spend
+      - name: raw_support_tickets
