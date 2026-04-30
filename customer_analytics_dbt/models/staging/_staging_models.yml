@@ -1,0 +1,76 @@
+# _staging_models.yml
+# author: Connor Dailey
+# date: 2026-04-30
+# description: schema tests for staging models; not_null/unique on PKs, accepted_values on enums, relationships on FKs to stg_customers
+
+version: 2
+
+models:
+  - name: stg_customers
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+      - name: plan_tier
+        tests:
+          - accepted_values:
+              values: ['starter', 'professional', 'enterprise']
+      - name: industry
+        tests:
+          - accepted_values:
+              values: ['SaaS', 'Fintech', 'Healthcare', 'Retail', 'Manufacturing', 'Media']
+      - name: acquisition_channel
+        tests:
+          - accepted_values:
+              values: ['organic', 'google_ads', 'linkedin_ads', 'referral', 'direct_sales']
+      - name: company_size
+        tests:
+          - accepted_values:
+              values: ['1-10', '11-50', '51-200', '201-1000', '1000+']
+  - name: stg_subscription_events
+    columns:
+      - name: event_id
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: event_type
+        tests:
+          - accepted_values:
+              values: ['signup', 'churn']
+  - name: stg_marketing_spend
+    columns:
+      - name: spend_id
+        tests:
+          - not_null
+          - unique
+      - name: channel
+        tests:
+          - accepted_values:
+              values: ['google_ads', 'linkedin_ads', 'referral_bonus', 'content_marketing', 'direct_sales']
+  - name: stg_support_tickets
+    columns:
+      - name: ticket_id
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: priority
+        tests:
+          - accepted_values:
+              values: ['low', 'medium', 'high', 'critical']
+      - name: category
+        tests:
+          - accepted_values:
+              values: ['billing', 'technical', 'feature_request', 'onboarding']
